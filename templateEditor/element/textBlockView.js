@@ -1,7 +1,7 @@
 define([
     "backbone",
-    "underscore",
-    "views/template/templateEditor/element/elementView"
+    "lodash",
+    "templateEditor/element/elementView"
 ], function (Backbone, _, ElementView) {
 
     "use strict";

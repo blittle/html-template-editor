@@ -17,7 +17,7 @@ body > div {
 }
 
 body.grid > div {
-    background: url("/app/css/images/grid.png") white repeat;
+    background: url("/grid.png") white repeat;
 }
 
 body > div:last-child {

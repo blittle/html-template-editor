@@ -1,10 +1,8 @@
 define([
-	'backbone', 'underscore',
-	"views/sfView",
-    "views/template/templateEditor/element/ElementContextDialog/ElementContextDialogView",
-    "resources/ckeditor/ckeditor",
-    "jquery_ui"
-], function(Backbone, _, SFView, ElementContextDialogView) {
+	'backbone', 'lodash',
+    "templateEditor/element/ElementContextDialog/ElementContextDialogView",
+    "jquery-ui"
+], function(Backbone, _, ElementContextDialogView) {
 
 	"use strict";
 
@@ -169,14 +167,6 @@ define([
             var zoom    = this.parent.$el.css('zoom'),
                 left    = parseInt(this.$el.css('left'), 10),
                 top     = parseInt(this.$el.css('top'), 10);
-
-            if(this.ckeditor) {
-                $('.cke_chrome').css({
-                    top: top * zoom,
-                    left: left * zoom + 800,
-                    width: 400
-                });
-            }
         },
 
         addHandles: function() {
@@ -217,13 +207,6 @@ define([
         },
 
         enableEdit: function() {
-
-            CKEDITOR.disableAutoInline = true;
-
-            if(!this.ckeditor) {
-                this.ckeditor = CKEDITOR.inline( this.$('.content')[0] );
-            }
-
             this.$('.content').attr('contenteditable', true);
         },
 

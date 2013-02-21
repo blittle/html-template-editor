@@ -1,12 +1,11 @@
 define([
-	'backbone', 'underscore',
-	'text!views/template/templateEditor/templateControls/templateControls.html',
-	"views/sfView"
-], function(Backbone, _, template, SFView) {
+	'backbone', 'lodash',
+	'text!templateEditor/templateControls/templateControls.html'
+], function(Backbone, _, template) {
 
 	"use strict";
 
-	var templateControlsView = SFView.extend({
+	var templateControlsView = Backbone.View.extend({
 		_template: _.template(template),
 		
 		className: 'templateControls',
@@ -14,10 +13,8 @@ define([
 			
 		},
 
-		serialize: function() { return {}; },		
-
 		render: function() {			
-			SFView.prototype.render.call(this);
+            this.$el.html(this._template());
 			return this;
 		},
 
@@ -37,7 +34,7 @@ define([
             }, this));
 
             html = "<html><head>" +
-                "<link rel='stylesheet' type='text/css' href='/app/js/views/template/templateEditor/templatePage/templateRendered.css'/>" +
+                "<link rel='stylesheet' type='text/css' href='/templateEditor/templatePage/templateRendered.css'/>" +
                 "</head><body>" + html + "</body></html>";
 
             var doc = window.open('','myconsole',

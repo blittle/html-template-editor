@@ -1,26 +1,35 @@
 define([
-	'backbone', 'underscore',
-	'text!views/template/templateEditor/templateEditor.html',
-	"views/sfView",
-    "views/template/templateEditor/templateContent/templateContentView",
-    "views/template/templateEditor/templateControls/templateControlsView"
-], function(Backbone, _, template, SFView, TemplateContentView, TemplateControlsView) {
+	'backbone', 'lodash',
+	'text!templateEditor/templateEditor.html',
+    "templateEditor/templateContent/templateContentView",
+    "templateEditor/templateControls/templateControlsView"
+], function(Backbone, _, template, TemplateContentView, TemplateControlsView) {
 
 	"use strict";
 
-	var templateEditorView = SFView.extend({
+	var templateEditorView = Backbone.View.extend({
 
 		_template: _.template(template),
 		
 		className: 'templateEditor',
 
 		initialize: function(options) {
-            this.createSubView("controls", TemplateControlsView);
-            this.createSubView("content", TemplateContentView);
+            this.controls = new TemplateControlsView(this.options);
+            this.content = new TemplateContentView(this.options);
+
+            this.controls.parent = this;
+            this.content.parent = this;
 		},
 
 		render: function() {
-			SFView.prototype.render.call(this);
+
+            this.$el.html(this._template());
+
+            this.$el.append(this.controls.el);
+            this.$el.append(this.content.el);
+          
+            this.controls.render();
+            this.content.render();
 
             this.resize();
 
@@ -33,6 +42,12 @@ define([
             });
 
             this.content.resize();
+        },
+
+        remove: function() {
+            this.controls.remove();
+            this.content.remove();
+            Backbone.View.prototype.remove.call(this);
         }
 	});
 

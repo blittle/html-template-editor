@@ -1,16 +1,13 @@
 define([
-	'backbone', 'underscore',
-    "views/template/templateEditor/templatePage/templatePageView",
-	"views/sfView"
-], function(Backbone, _, PageView, SFView) {
+	'backbone', 'lodash',
+    "templateEditor/templatePage/templatePageView"
+], function(Backbone, _, PageView) {
 
 	"use strict";
 
-	var templateContentView = SFView.extend({
+	var templateContentView = Backbone.View.extend({
 
         tagName: "iframe",
-		
-		className: 'templateContent',
 
 		initialize: function(options) {
 			this.collection = new Backbone.Collection([
@@ -23,8 +20,6 @@ define([
             this.pageViews = [];
 		},
 
-		serialize: function() { return {}; },
-
         getFrame: function(selector) {
             return selector ? this.$el.contents().find(selector) : this.$el.contents();
         },
@@ -32,10 +27,12 @@ define([
 		render: function() {
 
             this.getFrame('head').append($("<link/>",
-                { rel: "stylesheet", href: "/app/js/views/template/templateEditor/templatePage/template.css", type: "text/css" }
+                { rel: "stylesheet", href: "/templateEditor/templatePage/template.css", type: "text/css" }
             ));
 
             this.collection.each(this.buildPage, this);
+
+            this.$el.addClass('templateContent');
 
 			return this;
 		},

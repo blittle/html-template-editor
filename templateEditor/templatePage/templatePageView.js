@@ -1,10 +1,9 @@
 define([
-	'backbone', 'underscore',
-	'text!views/template/templateEditor/templatePage/templatePage.html',
-	"views/sfView",
-    "views/template/templateEditor/element/textBlockView",
-    "views/template/templateEditor/element/lineView"
-], function(Backbone, _, template, SFView, TextBlockView, LineView) {
+	'backbone', 'lodash',
+	'text!templateEditor/templatePage/templatePage.html',
+    "templateEditor/element/textBlockView",
+    "templateEditor/element/lineView"
+], function(Backbone, _, template, TextBlockView, LineView) {
 
 	"use strict";
 
@@ -33,7 +32,7 @@ define([
     };
 
 
-	var templatePageView = SFView.extend({
+	var templatePageView = Backbone.View.extend({
 		_template: _.template(template),
 
 		className: 'templatePage',
@@ -58,7 +57,8 @@ define([
 		serialize: function() { return {}; },
 
 		render: function() {
-			SFView.prototype.render.call(this);
+
+            this.$el.html(this._template());
 
             this.resize();
 

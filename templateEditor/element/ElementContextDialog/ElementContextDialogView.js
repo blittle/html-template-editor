@@ -1,12 +1,12 @@
 define([
-	'backbone', 'underscore',
-	'text!views/template/templateEditor/element/ElementContextDialog/elementContextDialog.html',
-	"views/sfView"
-], function(Backbone, _, template, SFView) {
+	'backbone', 'lodash',
+	'text!templateEditor/element/ElementContextDialog/elementContextDialog.html',
+    'jquery-ui'
+], function(Backbone, _, template) {
 
 	"use strict";
 
-	var ElementContextDialogView = SFView.extend({
+	var ElementContextDialogView = Backbone.View.extend({
 		_template: _.template(template),
 		
 		className: 'elementContextDialog whiteDialog clickWrapper',
@@ -15,10 +15,9 @@ define([
             this.$element = this.options.element.$el;
 		},
 
-		serialize: function() { return {}; },		
-
 		render: function() {			
-			SFView.prototype.render.call(this);
+
+            this.$el.html(this._template());
 
             this.$el.show("blind", 200);
 
