@@ -155,7 +155,7 @@ define([
         },
 
         stopDrag: function() {
-            this.$iframe.off("mousemove.drag");
+            if(this.$iframe) this.$iframe.off("mousemove.drag");
         },
 
         stopPropagation: function(e) {

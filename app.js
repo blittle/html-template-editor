@@ -1,10 +1,10 @@
 require.config({
     paths: {
-        'jquery': 'components/jquery/jquery',
-        'lodash': 'components/lodash/dist/lodash.min',
-        'text'  : 'components/requirejs-text/text',
-        'backbone': 'components/backbone/backbone',
-        'jquery-ui': 'components/jquery-ui/ui/minified/jquery-ui.custom.min'
+        'jquery': 'bower_components/jquery/jquery',
+        'lodash': 'bower_components/lodash/dist/lodash.min',
+        'text'  : 'bower_components/requirejs-text/text',
+        'backbone': 'bower_components/backbone/backbone',
+        'jquery-ui': 'bower_components/jquery-ui/ui/minified/jquery-ui.custom.min'
     },
     shim: {
         'backbone': {

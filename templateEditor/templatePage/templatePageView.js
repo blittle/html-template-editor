@@ -22,7 +22,7 @@ define([
     var Element = Backbone.Model.extend();
 
     var ElementCollection = Backbone.Collection.extend({
-        url: "/elements",
+        url: "",
         model: Element
     });
 
